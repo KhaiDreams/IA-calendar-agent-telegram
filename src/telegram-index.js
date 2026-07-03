@@ -1,6 +1,7 @@
 import cron from 'node-cron';
 import { startTelegramBot } from './telegram-bot.js';
 import { generateDailyMessage } from './daily-message.js';
+import { setBotContext } from './reminder-service.js';
 import config from './config.js';
 
 console.log('═══════════════════════════════════════');
@@ -8,6 +9,10 @@ console.log('  Calendar Agent — Assistente Telegram');
 console.log('═══════════════════════════════════════\n');
 
 const bot = startTelegramBot();
+
+// Configura o reminder-service com o contexto do Telegram
+setBotContext(config.telegramOwnerChatId, bot.telegram.sendMessage.bind(bot.telegram));
+console.log('[Reminder] Contexto do bot configurado.');
 
 // Agenda mensagem diária às 7:00 da manhã (horário de Brasília)
 cron.schedule('0 7 * * *', async () => {
