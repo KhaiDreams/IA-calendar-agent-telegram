@@ -182,12 +182,19 @@ const toolFunctions = {
 
   get_current_datetime: async () => {
     const now = new Date();
+    const tz = 'America/Sao_Paulo';
+
+    // en-CA locale gera YYYY-MM-DD nativamente, sem depender do timezone do servidor
+    const dateStr = now.toLocaleDateString('en-CA', { timeZone: tz });
+    const timeStr = now.toLocaleTimeString('pt-BR', { timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false });
+    const weekday = now.toLocaleDateString('pt-BR', { timeZone: tz, weekday: 'long' });
+
     return JSON.stringify({
       datetime: now.toISOString(),
-      date: now.toISOString().split('T')[0],
-      time: now.toTimeString().split(' ')[0].slice(0, 5),
-      timezone: 'America/Sao_Paulo',
-      weekday: now.toLocaleDateString('pt-BR', { weekday: 'long' }),
+      date: dateStr,
+      time: timeStr,
+      timezone: tz,
+      weekday,
     });
   },
 
