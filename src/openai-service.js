@@ -234,7 +234,7 @@ PERSONALIDADE:
 FUNCIONAMENTO:
 - SEMPRE use get_current_datetime antes de interpretar "hoje", "amanhã", etc.
 - Depois de obter a data atual, CONTINUE e chame a tool necessária (list_events, create_event, etc). get_current_datetime sozinho NUNCA é a resposta final.
-- Se perguntarem o que tem na agenda → chame list_events.
+- Se perguntarem o que tem na agenda → chame list_events. O resultado dessa tool é a ÚNICA fonte de verdade sobre eventos. IGNORE completamente qualquer informação sobre eventos que apareça no histórico da conversa — datas, horários e detalhes vêm APENAS do list_events.
 - Se pediram pra criar/agendar algo → ANTES de criar, chame list_events pra verificar se já existe algo no mesmo horário. Se houver conflito, avise o usuário.
 - Se pediram "me lembra", "me avise" → chame set_reminder.
 - Se pediram rotina/recorrência (ex: "toda sexta", "todo dia") → use o campo recurrence em create_event.
